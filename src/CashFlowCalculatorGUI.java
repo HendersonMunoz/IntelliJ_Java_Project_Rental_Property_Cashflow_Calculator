@@ -1,8 +1,9 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.math.*;
 
-// Variables below are automatically generated as I make edits/additions to the GUI through the Swing UI Design form
+// Automatically generated elements, as I make edits/additons to the GUI.
 public class CashFlowCalculatorGUI {
     private JTextField txtPurchasePrice;
     private JTextField txtMortgageRate;
@@ -18,7 +19,7 @@ public class CashFlowCalculatorGUI {
     private JTextField txtDownPayment;
     private JButton clearButton;
 
-    // Mains Method.
+    // Main method.
     public static void main(String[] args) {
         JFrame frame = new JFrame("CashFlowCalculatorGUI");
         frame.setContentPane(new CashFlowCalculatorGUI().Main);
@@ -27,11 +28,12 @@ public class CashFlowCalculatorGUI {
         frame.setVisible(true);
     }
 
+    // GUI method, housing the functionally for the CALCULATE and CLEAR buttons.
     public CashFlowCalculatorGUI() {
         calculateCashFlowButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                // Declaring variables that will be needed for both buttons.
                 double purchasePrice, downPayment, mortgageRate, propertyTaxes, insurance, rentalIncome, mortgagePayment, monthlyCashFlow;
 
                 //declaring the variables and getting the input from the user
@@ -44,15 +46,19 @@ public class CashFlowCalculatorGUI {
 
                 // declaring variables to calculate the monthly mortgage payment. 30 year fixed loan.
                 double principal = purchasePrice - downPayment;
-                double monthlyInterestRate = mortgageRate / 12.0;
-                int termInMonths = 360;
-                mortgagePayment = Math.round((principal * monthlyInterestRate) / (1 - Math.pow(1 + monthlyInterestRate, -termInMonths)));
-                // displaying the mortgage payment
+                // 12 months * 100 to convert from percent to decimal.
+                double monthlyInterestRate = mortgageRate / 1200.0;
+                // termInYears is the number of years for the mortgage term. 30 years * 12 months.
+                int termInMonths = 30 * 12;
+                // calculating the mortgagepayment.
+                mortgagePayment = Math.round(principal * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -termInMonths)));
+                //displaying the mortgage payment
                 txtMortgagePayment.setText(String.valueOf(mortgagePayment));
 
                 //declaring variables to calculate the monthly cashFlow.
                 double monthlyExpenses = propertyTaxes + insurance;
                 double totalExpenses = monthlyExpenses + mortgagePayment;
+                // cashflow = rental income - mortgage payment - insurance - pr0perty taxes.
                 monthlyCashFlow = Math.round(rentalIncome - totalExpenses);
                 //displaying the expected monthly cashFlow, after accounting for expenses.
                 txtCashFlow.setText(String.valueOf(monthlyCashFlow));
@@ -82,9 +88,5 @@ public class CashFlowCalculatorGUI {
                 txtConclusion.setText("");
             }
         });
-    }
-
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
     }
 }
