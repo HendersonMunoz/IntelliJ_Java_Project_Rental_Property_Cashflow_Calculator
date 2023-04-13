@@ -1,3 +1,3 @@
 # IntelliJ_Java_Project_Rental_Property_Cashflow_Calculator
-This caculator would help a real estate investor quickly determin if a property would be a good investment or not. Only requires a few parameters to work.
-No DB connectivuty required for this project. Only intelliJ and Swing UI Design for the GUI. 
+This calculator could help a real estate investor quickly determine if a rental property can be a good investment or not. The app only requires a few parameters to work.
+No Database connectivity required for this project. Only intelliJ and Swing UI Design for the GUI. 
